@@ -4,7 +4,16 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import BaseFilterBackend
+from rest_framework.filters import BaseFilterBackend
 # Create your views here.
+
+class SingleDoctor(BaseFilterBackend):
+    def filter_queryset(self, request, queryset, view):
+        doctor_id = request.query_params.get('doctor_id')
+        if doctor_id:
+            return queryset.filter(id = doctor_id)
+        return queryset
+
 class DoctorPagination(PageNumberPagination):
     page_size = 1 # items per page
     page_size_query_param = page_size
@@ -12,6 +21,7 @@ class DoctorPagination(PageNumberPagination):
 
 class DoctorViewSet(viewsets.ModelViewSet):
     pagination_class = DoctorPagination
+    filter_backends = [SingleDoctor]
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = models.Doctor.objects.all()
     serializer_class = serializers.DoctorSerializer

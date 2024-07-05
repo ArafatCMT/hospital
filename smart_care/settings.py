@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'patient',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://hospital-0851.onrender.com']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
