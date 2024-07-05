@@ -44,7 +44,7 @@ class RegistrationView(APIView):
             # print('token', token)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             # print('uid', uid)
-            confirmation_link = f"http://127.0.0.1:8000/patient/active/{uid}/{token}"
+            confirmation_link = f"https://hospital-0851.onrender.com/patient/active/{uid}/{token}"
 
             # email part
             email_subject ="Confirm Your Email"
