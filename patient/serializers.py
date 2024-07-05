@@ -21,6 +21,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         email = self.validated_data['email']
         password = self.validated_data['password']
         confirm_password = self.validated_data['confirm_password']
+        # image = self.validated_data['image']
+        # mobile_no = self.validated_data['mobile_no']
 
         if password != confirm_password:
             raise serializers.ValidationError({'error': "Password dosn't match"})
@@ -33,6 +35,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         account.set_password(password)
         account.is_active = False
         account.save()
+        
         return account
     
 class LoginSerializer(serializers.Serializer):
